@@ -1,0 +1,329 @@
+\q
+\q
+CREATE DATABASE test_db;
+\c test_db;
+CREATE TABLE famous_people (
+id SERIAL PRIMARY KEY,
+first_name VARCHAR(50),
+last_name VARCHAR(50),
+birthdate DATE);
+INSERT INTO famous_people (first_name, last_name, birthdate)
+VALUES ('Abraham', 'Lincoln', '1809-02-12');
+INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Mahatma', 'Gandhi', '1869-10-02');
+INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Paul', 'Rudd', '1969-04-06');
+INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Paul', 'Giamatti', '1967-06-06');
+SELECT * FROM famous_people
+;
+SELECT * FROM famous_people WHERE birthdate >= '1920-01-01'
+;
+SELECT * FROM famous_people WHERE birthdate <= '1920-01-01';
+SELECT * FROM famous_people WHERE first_name = '%Paul';
+SELECT * FROM famous_people WHERE first_name = 'Paul%';
+SELECT * FROM famous_people WHERE first_name = 'Paul';
+SELECT * FROM famous_people 
+;
+SELECT count(*) FROM famous_people;
+\q
+CREATE DATABASE bootcampx;
+\c bootcampx;
+\q
+\c bootcampx
+\i 1_queries/2_total_students_cohort.sql
+\i 1_queries/2_total_students_cohort.sql
+\i 1_queries/2_total_students_cohort.sql
+\i 1_queries/2_total_students_cohort.sql
+\i 1_queries/3_students_without_contact.sql
+\i 1_queries/3_students_without_contact.sql
+\i 1_queries/3_students_without_contact.sql
+\i 1_queries/4_students_without_gmail.sql
+\i 1_queries/4_students_without_gmail.sql
+\i 1_queries/4_students_without_gmail.sql
+\i 1_queries/5_currently_enrolled_students.sql
+\i 1_queries/6_graduate_github_activity.sql
+\i migrations/assignments.sql
+\i migrations/assignments.sql
+\i migrations/assignments_submissions.sql
+DROP TABLE IF EXISTS assignments
+DROP TABLE IF EXISTS assignment_submission
+\dt
+DROP TABLE IF EXISTS assignments;
+DROP TABLE IF EXISTS assignments;
+DROP TABLE IF EXISTS assignment_submission;
+\dt
+\i migrations/assignments_submissions.sql
+\dt
+\i seeds/assignments_seeds.sql
+\i seeds/assignment_submissions_seeds.sql
+\i seeds/assignment_submissions_seeds.sql
+\dt
+DROP TABLE IF EXISTS assignments;
+DROP TABLE IF EXISTS assignments_submission;
+DROP TABLE IF EXISTS assignment_submission;
+DROP TABLE IF EXISTS assignments;
+\dt
+\i migrations/assignments_submissions.sql
+\dt
+\i seeds/assignments_seeds.sql
+\i seeds/assignment_submissions_seeds.sql
+SELECT count(*) FROM assignment_submissionss;
+SELECT count(*) FROM assignment_submissions;
+SELECT students.name as student_name, email, cohorts.name as cohort_name
+FROM students JOIN cohorts ON cohort.id = cohort_id;
+FROM students JOIN cohorts ON cohorts.id = cohort_id;
+SELECT students.name as student_name, email, cohorts.name as cohort_name
+FROM students JOIN cohorts ON cohorts.id = cohort_id;
+SELECT students.name as student_name, email, cohorts.name as cohort_name
+FROM students JOIN cohorts ON cohorts.id = cohort_id;
+SELECT students.name, email, cohorts.name 
+FROM students OUTTER JOIN cohorts ON cohorts.id = cohort_id;
+SELECT students.name, email, cohorts.name
+FROM students OUTER JOIN cohorts ON cohorts.id = cohort_id;
+SELECT students.name as student_name, email, cohorts.name as cohort_name
+FROM students OUTER JOIN cohorts ON cohorts.id = cohort_id;
+SELECT students.name as student_name, email, cohorts.name as cohort_name
+FROM students LEFT OUTER JOIN cohorts ON cohorts.id = cohort_id;
+SELECT students.name as student_name, email, cohorts.name as cohort_name
+FROM students RIGHT OUTER JOIN cohorts ON cohorts.id = cohort_id;
+SELECT students.name as student_name, email, cohorts.name as cohort_name
+FROM students FULL OUTER JOIN cohorts ON cohorts.id = cohort_id;
+SELECT students.name as student_name, students.start_date as student_start_date, cohort.name as cohort_name, cohort.start_date as cohort_start_date
+FROM students JOIN ON cohorts.start_date = cohort_start_date
+ORDER BY cohorts.start_date;
+SELECT students.name, cohorts.name, cohorts.start_date, students.start_date
+FROM students
+JOIN cohorts on cohorts.id
+WHERE cohorts.start_date != students.start_date
+ORDER BY cohort.start_date;
+SELECT students.name, cohorts.name, cohorts.start_date as cohort_start_date, students.start_date as student_start_date
+FROM students
+JOIN cohorts ON cohort_id = cohorts.id
+WHERE cohorts.start_date != students.start_date
+ORDER BY cohort_start_date;
+\i 2_queries_joins/1_student_total_assignment_duration.sql 
+\i 2_queries_joins/1_student_total_assignment_duration.sql 
+\i 2_queries_joins/1_student_total_assignment_duration.sql 
+\i 2_queries_joins/1_student_total_assignment_duration.sql 
+\i 2_queries_joins/1_student_total_assignment_duration.sql 
+\i 2_queries_joins/1_student_total_assignment_duration.sql 
+\i 2_queries_joins/2_cohort_total_assignment_duration.sql 
+\i 2_queries_joins/2_cohort_total_assignment_duration.sql 
+SELECT students.name as student, count(assignmnet_submissions.*) as total_submissions
+FROM assignment_submissions
+JOIN students ON students.id = student_id
+GROUP BY students.name;
+SELECT students.name as student, count(assignment_submissions.*) as total_submissions
+FROM assignment_submissions
+JOIN students ON students.id = student_id
+GROUP BY students.name
+SELECT students.name as student, count(assignment_submissions.*) as total_submissions
+FROM assignment_submissions
+JOIN students ON students.id = student_id
+GROUP BY students.name;
+SELECT students.name as student, count(assignmnet_submissions.*) as total_submissions
+FROM assignment_submissions
+JOIN students ON students.id = student_id
+GROUP BY students.name
+WHERE students.start_date != NULL;
+SELECT students.name as student, count(assignment_submissions.*) as total_submissions
+FRMO assignment_submissions
+JOIN students ON students.id = student_id
+WHERE students.end_date IS NULL
+GROUP BY students.name
+HAVING count < 100;
+\i 3_queries_group-by/1_assignments_perday.sql 
+\i 3_queries_group-by/1_assignments_perday.sql 
+\i 3_queries_group-by/1_assignments_perday.sql 
+\i 3_queries_group-by/2_assignments_perday_greaterthan.sql 
+\i 3_queries_group-by/3_large_cohorts.sql 
+\i 3_queries_group-by/3_large_cohorts.sql 
+\i 3_queries_group-by/3_large_cohorts.sql 
+\i 3_queries_group-by/3_large_cohorts.sql 
+\i 3_queries_group-by/4_total_assigment_submissions.sql 
+\i 3_queries_group-by/4_total_assigment_submissions.sql 
+\i 3_queries_group-by/4_total_assigment_submissions.sql 
+\i 3_queries_group-by/4_total_assigment_submissions.sql 
+\i 3_queries_group-by/4_total_assigment_submissions.sql 
+\i 3_queries_group-by/5_avg_completion_time.sql 
+\i 3_queries_group-by/5_avg_completion_time.sql 
+\i 3_queries_group-by/6_lowavg_completion_time.sql 
+\i 3_queries_group-by/6_lowavg_completion_time.sql 
+\i 3_queries_group-by/6_lowavg_completion_time.sql 
+SELECT (
+SELECT count(*)
+;
+SELECT (
+SELECT count(assignments)
+FROM assignments)
+- count(assignment_submissions) as total_incomplete
+FROM assignment_submissions
+JOIN students ON student.id = student_id
+WHERE students.name = 'Ibrahim Schimmel';
+);
+\q
+\c bootcampx 
+\i  migrations/teachers_assistance_requests.sql
+\dt
+\i  migrations/teachers_assistance_requests.sql;
+\dt
+\i  migrations/teachers_assistance_requests.sql;
+\i  migrations/teachers_assistance_requests.sql
+\i migrations/teachers_assistance_requests.sql
+\i migrations/teachers_assistance_requests.sql;
+\i migrations/teachers_assistance_requests.sql
+\i migrations/teachers_assistance_requests.sql
+\q
+\c bootcampx 
+\dt
+\i migrations/teachers_assistance_requests.sql
+\dt
+\i migrations/teachers_assistance_requests.sql
+\dt
+DROP TABLE IF EXIST teachers
+;
+DROP TABLE IF EXISTS teachers;
+DROP TABLE IF EXISTS assistance_requests;
+\i migrations/teachers_assistance_requests.sql
+\dt
+\i seeds/teachers_seeds.sql;
+\i seeds/assistance_requests_seeds.sql;
+\i 4_queries/1_total_assistance_requests.sql; 
+\i 4_queries/1_total_assistance_requests.sql;
+\i 4_queries/1_total_assistance_requests.sql;
+\i 4_queries/1_total_assistance_requests.sql;
+\i 4_queries/1_total_assistance_requests.sql;
+\i 4_queries/2_total_student_requests.sql 
+\i 4_queries/2_total_student_requests.sql 
+\i 4_queries/3_assistance_request_data.sql 
+\i 4_queries/3_assistance_request_data.sql 
+\i 4_queries/3_assistance_request_data.sql 
+\i 4_queries/3_assistance_request_data.sql 
+\i 4_queries/3_assistance_request_data.sql 
+\i 4_queries/3_assistance_request_data.sql 
+\i 4_queries/3_assistance_request_data.sql 
+\i 4_queries/4_average_assistance_time.sql 
+\i 4_queries/5_avg_cohort_assistance_time.sql 
+\i 4_queries/5_avg_cohort_assistance_time.sql 
+\i 4_queries/5_avg_cohort_assistance_time.sql 
+\i 4_queries/5_avg_cohort_assistance_time.sql 
+\i 4_queries/5_avg_cohort_assistance_time.sql 
+\i 4_queries/5_avg_cohort_assistance_time.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/6_longest_cohort_assistance.sql 
+\i 4_queries/7_avg_assistance_wait_time.sql 
+\i 4_queries/7_avg_assistance_wait_time.sql 
+\i 4_queries/8_total_cohort_assistance_duration.sql 
+\i 4_queries/8_total_cohort_assistance_duration.sql 
+\i 4_queries/8_total_cohort_assistance_duration.sql 
+\i 4_queries/8_total_cohort_assistance_duration.sql 
+\i 4_queries/8_total_cohort_assistance_duration.sql 
+\i 4_queries/8_total_cohort_assistance_duration.sql 
+\i 4_queries/8_total_cohort_assistance_duration.sql 
+\i 4_queries/9_avg_cohort_assistance_duration.sql 
+\i 4_queries/9_avg_cohort_assistance_duration.sql 
+\i 4_queries/9_avg_cohort_assistance_duration.sql 
+\i 4_queries/9_avg_cohort_assistance_duration.sql 
+\i 4_queries/9_avg_cohort_assistance_duration.sql 
+\i 4_queries/9_avg_cohort_assistance_duration.sql 
+\i 4_queries/10_assignment_most_requests.sql 
+\i 4_queries/10_assignment_most_requests.sql 
+\i 4_queries/10_assignment_most_requests.sql 
+\i 4_queries/10_assignment_most_requests.sql 
+\i 4_queries/10_assignment_most_requests.sql 
+\i 4_queries/10_assignment_most_requests.sql 
+\i 4_queries/10_assignment_most_requests.sql 
+\i 4_queries/10_assignment_most_requests.sql 
+\i 4_queries/11_total_assignments_duration.sql 
+\i 4_queries/11_total_assignments_duration.sql 
+\i 4_queries/11_total_assignments_duration.sql 
+\i 4_queries/11_total_assignments_duration.sql 
+\i 4_queries/11_total_assignments_duration.sql 
+\i 4_queries/11_total_assignments_duration.sql 
+\i 4_queries/12_name_of_teachers_assisted.sql 
+\i 4_queries/12_name_of_teachers_assisted.sql 
+\i 4_queries/12_name_of_teachers_assisted.sql 
+\i 4_queries/12_name_of_teachers_assisted.sql 
+\i 4_queries/12_name_of_teachers_assisted.sql 
+\i 4_queries/12_name_of_teachers_assisted.sql 
+\i 4_queries/13_name_of_teacher_num_of_assistances.sql 
+\i 4_queries/13_name_of_teacher_num_of_assistances.sql 
+\i 4_queries/13_name_of_teacher_num_of_assistances.sql 
+\i 4_queries/13_name_of_teacher_num_of_assistances.sql 
+\q
+CREATE DATABASE test_db;
+\c test_db
+CREATE TABLE users (
+id PRIMARY KEY,
+name, 
+birth_year,
+member_since);
+CREATE TABLE users (
+id INTEGER PRIMARY KEY);
+CREATE TABLE users (
+id INTEGER PRIMARY KEY,
+name VARCHAR(255),
+birth_year SMALLINT,
+member_since TIMESTAMP
+);
+ALTER TABLE users 
+ADD COLUMN name VARCHAR(255),
+ADD COLUMN birth_year SMALLINT,
+ADD COLUMN member_since TIMESTAMP
+);
+ALTER TABLE users
+ADD COLUMN name VARCHAR(255),
+ADD COLUMN birth_year SMALLINT,
+ADD COLUMN member_since TIMESTAMP;
+\d users
+DROP TABLE IF EXISTS users CASCADE;
+CREATE TABLE users (
+id INTEGER PRIMARY KEY<
+;
+);
+CREATE TABLE users (
+id INTEGER PRIMARY KEY,
+name VARCHAR(255),
+birth_year SMALLINT,
+member_since TIMESTAMP
+);
+INSERT INTO users (id, birth_year)
+VALUES (1, 2019);
+SELECT * FROM users;
+DROP TABLE IF EXISTS users CASCADE;
+CREATE TABLE users (
+id INTEGER PRIMARY KEY NOT NULL,
+name VARCHAR(255) NOT NULL,
+birth_year SMALLINT NOT NULL,
+member_since TIMESTAMP NOT NULL,
+);
+\d
+CREATE TABLE users (
+id INTEGER PRIMARY KEY NOT NULL,
+name VARCHAR(255) NOT NULL,
+birth_year SMALLINT NOT NULL,
+member_since TIMESTAMP NOT NULL
+);
+INSERT INTO users (id, birth_year)
+VALUES (1, 2019);
+INSERT INTO users (id, name, birth_year, member_since)
+VALUES (1, 'Susan Hudson', 2000, Now());
+SELECT * FROM users;
+ALTER TABLE users
+ALTER COLUMN member_since
+SET DEFAULT Now();
+INSERT INTO users
+(id, name, birth_year)
+VALUES (2, 'Malloy Jenkins', 1000);
+\d
+\s users
