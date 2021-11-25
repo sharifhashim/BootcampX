@@ -7,6 +7,19 @@ const pool = new Pool({
   database: 'bootcampx'
 });
 
+
+const cohortName = process.argv[2] || JUL02;
+const values = [`${cohortName}`];
+const queryString = `
+SELECT DISTINCT teachers.name as teacher, cohorts.name as cohort
+FROM teachers
+JOIN assistance_requests ON teacher_id = teachers.id
+JOIN students ON student_id = students.id
+JOIN cohorts ON cohorts.id = cohort_id
+WHERE cohorts.name = $1
+ORDER BY teacher
+`;
+
 pool.connect()
 .then(() => {
   console.log('database connected');
@@ -15,15 +28,8 @@ pool.connect()
   console.error('database connection error', err.stack)
 });
 
-pool.query(`
-SELECT DISTINCT teachers.name as teacher, cohorts.name as cohort
-FROM teachers
-JOIN assistance_requests ON teacher_id = teachers.id
-JOIN students ON student_id = students.id
-JOIN cohorts ON cohorts.id = cohort_id
-WHERE cohorts.name = '${process.argv[2] || 'JUL02'}'
-ORDER BY teacher;
-`)
+
+pool.query(queryString, values)
 .then(res => {
   res.rows.forEach(user => {
     console.log(`${user.cohort}: ${user.teacher}`);
